@@ -1,0 +1,295 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #050505;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.site {
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 60px;
+  background: rgba(5, 5, 5, 0.85);
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a,
+.nav-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-btn {
+  border: 1px solid white;
+  padding: 10px 18px;
+  border-radius: 30px;
+}
+
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.35)),
+    url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px;
+}
+
+.hero-overlay {
+  max-width: 760px;
+}
+
+.small-title {
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 13px;
+}
+
+.hero h1 {
+  font-size: 70px;
+  line-height: 1.05;
+  margin: 20px 0;
+}
+
+.hero-text {
+  color: #ddd;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  margin-top: 35px;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 15px 26px;
+  text-decoration: none;
+  border-radius: 35px;
+  font-weight: bold;
+}
+
+.primary-btn {
+  background: white;
+  color: black;
+}
+
+.secondary-btn {
+  border: 1px solid white;
+  color: white;
+}
+
+.section {
+  width: 100%;
+  padding: 100px 60px;
+}
+
+.dark {
+  width: 100%;
+  background: #101010;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+h2 {
+  font-size: 42px;
+  margin: 15px 0;
+}
+
+.section p {
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.center {
+  text-align: center;
+}
+
+.cards,
+.reviews {
+  width: 100%;
+  margin-top: 45px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.property-card,
+.review {
+  background: #050505;
+  border: 1px solid #222;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.property-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.property-content {
+  padding: 24px;
+}
+
+.property-content h3 {
+  font-size: 25px;
+  margin: 0;
+}
+
+.property-content h4 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.features {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.features span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ddd;
+}
+
+.service-grid {
+  width: 100%;
+  margin-top: 45px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.service-grid div {
+  border: 1px solid #222;
+  padding: 35px 20px;
+  border-radius: 22px;
+  text-align: center;
+  background: #101010;
+  font-weight: bold;
+}
+
+.review {
+  padding: 30px;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 18px;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.contact p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+form {
+  display: grid;
+  gap: 16px;
+  background: #101010;
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid #222;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 16px;
+  background: #050505;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 12px;
+}
+
+textarea {
+  height: 130px;
+}
+
+button {
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    padding: 18px 25px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .hero {
+    padding: 110px 25px;
+  }
+
+  .hero h1 {
+    font-size: 45px;
+  }
+
+  .two-col,
+  .cards,
+  .service-grid,
+  .reviews,
+  .contact {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 70px 25px;
+  }
+}
