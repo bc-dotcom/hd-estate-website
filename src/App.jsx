@@ -48,16 +48,29 @@ export default function App() {
         <a className="navButton" href="#contact">Book Appraisal</a>
       </header>
 
-      <section className="hero">
-        <div className="heroContent">
+      <section className="hero" id="home">
+        <div className="heroInner">
           <p className="eyebrow">Sydney Real Estate Agency</p>
-          <h1>High Definition Living Starts Here</h1>
-          <p>
-            Premium real estate service for Sydney owners, buyers, renters and investors.
+
+          <h1>Local Knowledge. Client-Focused Service. Strong Results.</h1>
+
+          <p className="heroMotto">
+            HD Estate — High Definition Living Starts Here
           </p>
+
+          <div className="appraisalBox">
+            <input placeholder="Start typing your property address" />
+            <button>Find Out</button>
+          </div>
+
+          <p className="heroSmallText">
+            Looking to buy, sell, lease or manage a property? Speak with HD Estate today.
+          </p>
+
           <div className="heroActions">
             <a href="#contact" className="primaryBtn">Book an Appraisal</a>
             <a href="#listings" className="secondaryBtn">View Listings</a>
+            <a href="#contact" className="secondaryBtn">Contact Us</a>
           </div>
         </div>
       </section>
