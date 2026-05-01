@@ -498,3 +498,18 @@ footer small {
 #services .serviceGrid div:hover {
   background: #f0f0f0 !important;
 }
+#listings {
+  background: #f5f5f2 !important;
+  color: #111 !important;
+}
+
+#listings .eyebrow,
+#listings h2 {
+  color: #111 !important;
+}
+
+#listings .propertyCard {
+  background: #ffffff !important;
+  color: #111 !important;
+  border: 1px solid #e5e5e5 !important;
+}
