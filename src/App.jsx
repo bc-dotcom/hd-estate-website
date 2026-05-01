@@ -1,95 +1,158 @@
 import React from "react";
+import { BedDouble, Bath, Car, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import "./App.css";
+
+const properties = [
+  {
+    price: "$1,250,000",
+    title: "Modern Family Residence",
+    location: "Parramatta, NSW",
+    beds: 4,
+    baths: 2,
+    cars: 2,
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    price: "$680 per week",
+    title: "Stylish Apartment Living",
+    location: "Granville, NSW",
+    beds: 2,
+    baths: 2,
+    cars: 1,
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    price: "Contact Agent",
+    title: "Investment Opportunity",
+    location: "Merrylands, NSW",
+    beds: 3,
+    baths: 1,
+    cars: 1,
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80",
+  },
+];
 
 export default function App() {
   return (
-    <div className="app">
-
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="logo">HD Estate</div>
-        <div className="nav-links">
-          <a href="#">About</a>
-          <a href="#">Listings</a>
-          <a href="#">Services</a>
-          <a href="#">Contact</a>
-          <button className="btn-primary">Book Appraisal</button>
+    <div className="site">
+      <header className="navbar">
+        <div className="brand">
+          <span>HD</span> ESTATE
         </div>
-      </nav>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#listings">Listings</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a className="navButton" href="#contact">Book Appraisal</a>
+      </header>
 
-      {/* HERO */}
       <section className="hero">
-        <div className="hero-overlay">
+        <div className="heroContent">
+          <p className="eyebrow">Sydney Real Estate Agency</p>
           <h1>High Definition Living Starts Here</h1>
           <p>
-            Helping Sydney buyers, sellers and investors move forward with confidence
+            Premium real estate service for Sydney owners, buyers, renters and investors.
           </p>
-          <div className="hero-buttons">
-            <button className="btn-primary">View Listings</button>
-            <button className="btn-outline">Contact Agent</button>
+          <div className="heroActions">
+            <a href="#contact" className="primaryBtn">Book an Appraisal</a>
+            <a href="#listings" className="secondaryBtn">View Listings</a>
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section className="section">
-        <h2>Modern real estate service with local Sydney knowledge</h2>
+      <section id="about" className="section about">
+        <div>
+          <p className="eyebrow">About HD Estate</p>
+          <h2>Modern property service with local Sydney knowledge.</h2>
+        </div>
         <p>
-          We provide premium service with strong communication and proven results.
+          HD Estate focuses on clear communication, strong market knowledge and client-focused results.
+          Whether you are selling, leasing, buying or investing, we help you move forward with confidence.
         </p>
       </section>
 
-      {/* PROPERTIES */}
-      <section className="section">
-        <h2>Featured Properties</h2>
+      <section id="listings" className="section dark">
+        <p className="eyebrow center">Featured Listings</p>
+        <h2 className="center">Properties for sale and rent</h2>
 
-        <div className="grid">
-
-          <div className="card">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" />
-            <div className="card-body">
-              <h3>$1,250,000</h3>
-              <p>Modern Family Home</p>
-              <span>Parramatta, NSW</span>
+        <div className="propertyGrid">
+          {properties.map((property) => (
+            <div className="propertyCard" key={property.title}>
+              <img src={property.image} alt={property.title} />
+              <div className="propertyBody">
+                <h3>{property.price}</h3>
+                <h4>{property.title}</h4>
+                <p>{property.location}</p>
+                <div className="features">
+                  <span><BedDouble size={17} /> {property.beds}</span>
+                  <span><Bath size={17} /> {property.baths}</span>
+                  <span><Car size={17} /> {property.cars}</span>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="card">
-            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" />
-            <div className="card-body">
-              <h3>$680/week</h3>
-              <p>Stylish Apartment</p>
-              <span>Granville, NSW</span>
-            </div>
-          </div>
-
+          ))}
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="section dark">
-        <h2>Our Services</h2>
-        <div className="services">
-          <div>Property Sales</div>
-          <div>Property Management</div>
-          <div>Free Appraisals</div>
-          <div>Investment Advice</div>
+      <section id="services" className="section">
+        <p className="eyebrow center">Our Services</p>
+        <h2 className="center">Property services designed for Sydney clients</h2>
+
+        <div className="serviceGrid">
+          <div>
+            <h3>Property Sales</h3>
+            <p>Strategic selling support to maximise value and attract serious buyers.</p>
+          </div>
+          <div>
+            <h3>Property Management</h3>
+            <p>Reliable rental management focused on care, communication and protection.</p>
+          </div>
+          <div>
+            <h3>Free Appraisals</h3>
+            <p>Clear property value guidance based on current Sydney market conditions.</p>
+          </div>
+          <div>
+            <h3>Investment Advice</h3>
+            <p>Practical advice to help investors make confident property decisions.</p>
+          </div>
         </div>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="section">
-        <h2>Client Reviews</h2>
-        <p className="review">
-          “Professional, clear and very helpful from start to finish.”
-        </p>
+      <section className="cta">
+        <h2>Ready to understand your property value?</h2>
+        <p>Book a free appraisal and speak with HD Estate today.</p>
+        <a href="#contact">Get Free Appraisal <ArrowRight size={18} /></a>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <p>© 2026 HD Estate</p>
+      <section id="contact" className="section contact">
+        <div>
+          <p className="eyebrow">Contact HD Estate</p>
+          <h2>Speak to an agent today</h2>
+          <p className="contactIntro">
+            Send an enquiry and we will contact you about sales, rentals, appraisals or property management.
+          </p>
+
+          <p><Phone size={18} /> 0420 200 969</p>
+          <p><Mail size={18} /> Work email to be confirmed</p>
+          <p><MapPin size={18} /> Sydney, NSW</p>
+        </div>
+
+        <form>
+          <input placeholder="Full name" />
+          <input placeholder="Email address" />
+          <input placeholder="Phone number" />
+          <textarea placeholder="How can we help?"></textarea>
+          <button type="button">Send Enquiry</button>
+        </form>
+      </section>
+
+      <footer>
+        <div className="brand"><span>HD</span> ESTATE</div>
+        <p>High Definition Living Starts Here</p>
+        <small>© 2026 HD Estate. All rights reserved.</small>
       </footer>
-
     </div>
   );
 }
