@@ -52,10 +52,10 @@ export default function App() {
         <div className="heroInner">
           <p className="eyebrow">Sydney Real Estate Agency</p>
 
-          <h1>Local Knowledge. Client-Focused Service. Strong Results.</h1>
+          <h1>Local Knowledge. Strong Results.</h1>
 
           <p className="heroMotto">
-            HD Estate — High Definition Living Starts Here
+            High Definition Living Starts Here
           </p>
 
           <div className="appraisalBox">
