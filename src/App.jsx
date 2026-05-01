@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BedDouble, Bath, Car, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import "./App.css";
 
@@ -33,6 +33,29 @@ const properties = [
 ];
 
 export default function App() {
+  useEffect(() => {
+    const elements = document.querySelectorAll(".fade-up");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, // ✅ IMPORTANT comma here
+      { threshold: 0.1 }
+    );
+
+    elements.forEach((el) => {
+      observer.observe(el);
+
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        el.classList.add("show");
+      }
+    });
+  }, []);
+
   return (
     <div className="site">
       <header className="navbar">
@@ -75,7 +98,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="about" className="section about">
+      <section id="about" className="section about fade-up">
         <div>
           <p className="eyebrow">About HD Estate</p>
           <h2>Modern property service with local Sydney knowledge.</h2>
@@ -86,7 +109,7 @@ export default function App() {
         </p>
       </section>
 
-      <section id="listings" className="section dark">
+      <section id="listings" className="section listings">
         <p className="eyebrow center">Featured Listings</p>
         <h2 className="center">Properties for sale and rent</h2>
 
@@ -109,7 +132,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="services" className="section">
+      <section id="services" className="section services fade-up">
         <p className="eyebrow center">Our Services</p>
         <h2 className="center">Property services designed for Sydney clients</h2>
 
@@ -133,13 +156,13 @@ export default function App() {
         </div>
       </section>
 
-      <section className="cta">
+      <section className="cta fade-up">
         <h2>Ready to understand your property value?</h2>
         <p>Book a free appraisal and speak with HD Estate today.</p>
         <a href="#contact">Get Free Appraisal <ArrowRight size={18} /></a>
       </section>
 
-      <section id="contact" className="section contact">
+      <section id="contact" className="section contact fade-up">
         <div>
           <p className="eyebrow">Contact HD Estate</p>
           <h2>Speak to an agent today</h2>
@@ -169,3 +192,4 @@ export default function App() {
     </div>
   );
 }
+
