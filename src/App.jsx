@@ -72,6 +72,11 @@ export default function App() {
       </header>
 
       <section className="hero" id="home">
+        <div className="heroBackdrop" aria-hidden="true">
+          <span className="heroSlide slideOne"></span>
+          <span className="heroSlide slideTwo"></span>
+          <span className="heroSlide slideThree"></span>
+        </div>
         <div className="heroInner">
           <p className="eyebrow">Sydney Real Estate Agency</p>
 

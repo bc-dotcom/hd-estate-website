@@ -77,22 +77,97 @@ nav a,
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
   min-height: 82vh;
-  background-image:
-    linear-gradient(rgba(40, 40, 40, 0.58), rgba(40, 40, 40, 0.58)),
-    url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1900&q=80");
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 180px 6% 120px;
   text-align: center;
+  overflow: hidden;
+  background: #050505;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.62) 58%, rgba(0, 0, 0, 0.86) 100%);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 190px;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(245, 245, 242, 0), #f5f5f2 88%);
+  pointer-events: none;
+}
+
+.heroBackdrop,
+.heroSlide {
+  position: absolute;
+  inset: 0;
+}
+
+.heroBackdrop {
+  z-index: -2;
+  background: #050505;
+}
+
+.heroSlide {
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  filter: saturate(0.9) contrast(1.04);
+  transform: scale(1.08);
+  animation: blendedHero 18s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.slideOne {
+  background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1900&q=80");
+}
+
+.slideTwo {
+  background-image: url("https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1900&q=80");
+  animation-delay: 6s;
+}
+
+.slideThree {
+  background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1900&q=80");
+  animation-delay: 12s;
+}
+
+@keyframes blendedHero {
+  0% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+
+  8%,
+  34% {
+    opacity: 1;
+  }
+
+  42%,
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
 }
 
 .heroInner {
   max-width: 980px;
   color: white;
+  animation: heroContentIn 900ms ease both;
 }
 
 .hero h1 {
@@ -101,6 +176,18 @@ nav a,
   max-width: 950px;
   margin: 0 auto 22px;
   font-weight: 800;
+}
+
+@keyframes heroContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -180,15 +267,6 @@ nav a,
   letter-spacing: 4px;
   font-size: 13px;
   margin-bottom: 18px;
-}
-
-.hero h1 {
-  .hero h1 {
-  font-size: clamp(32px, 4vw, 56px);
-  line-height: 1.1;
-  max-width: 800px;
-  margin: 0 auto 20px;
-}
 }
 
 .heroInner {
@@ -458,6 +536,10 @@ footer small {
     padding: 110px 24px;
   }
 
+  .hero::after {
+    height: 120px;
+  }
+
   .section,
   .cta {
     padding: 80px 24px;
@@ -473,6 +555,22 @@ footer small {
   .heroActions {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroSlide,
+  .heroInner,
+  .primaryBtn,
+  .secondaryBtn,
+  .propertyCard,
+  .serviceGrid div {
+    animation: none;
+    transition: none;
+  }
+
+  .slideOne {
+    opacity: 1;
   }
 }
 
