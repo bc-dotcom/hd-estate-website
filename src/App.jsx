@@ -198,6 +198,21 @@ export default function App() {
           <p><Phone size={18} /> 0420 200 969</p>
           <p><Mail size={18} /> Work email to be confirmed</p>
           <p><MapPin size={18} /> Sydney, NSW</p>
+
+          <div id="connect" className="connect" aria-labelledby="connect-heading">
+            <div className="connectInner">
+              <h2 id="connect-heading">Connect</h2>
+
+              <div className="socialList">
+                {socialLinks.map(({ name, href, icon: Icon }) => (
+                  <a href={href} key={name} target="_blank" rel="noreferrer">
+                    <Icon size={19} strokeWidth={2.2} />
+                    <span>{name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         <form>
@@ -207,21 +222,6 @@ export default function App() {
           <textarea placeholder="How can we help?"></textarea>
           <button type="button">Send Enquiry</button>
         </form>
-      </section>
-
-      <section id="connect" className="connect" aria-labelledby="connect-heading">
-        <div className="connectInner">
-          <h2 id="connect-heading">Connect</h2>
-
-          <div className="socialList">
-            {socialLinks.map(({ name, href, icon: Icon }) => (
-              <a href={href} key={name} target="_blank" rel="noreferrer">
-                <Icon size={19} strokeWidth={2.2} />
-                <span>{name}</span>
-              </a>
-            ))}
-          </div>
-        </div>
       </section>
 
       <footer>
