@@ -1,5 +1,17 @@
 import React, { useEffect } from "react";
-import { BedDouble, Bath, Car, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import {
+  BedDouble,
+  Bath,
+  Car,
+  Phone,
+  Mail,
+  MapPin,
+  ArrowRight,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+} from "lucide-react";
 import "./App.css";
 
 const properties = [
@@ -30,6 +42,13 @@ const properties = [
     cars: 1,
     image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80",
   },
+];
+
+const socialLinks = [
+  { name: "Facebook", href: "https://www.facebook.com/", icon: Facebook },
+  { name: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
+  { name: "LinkedIn", href: "https://www.linkedin.com/", icon: Linkedin },
+  { name: "YouTube", href: "https://www.youtube.com/", icon: Youtube },
 ];
 
 export default function App() {
@@ -187,6 +206,21 @@ export default function App() {
           <textarea placeholder="How can we help?"></textarea>
           <button type="button">Send Enquiry</button>
         </form>
+      </section>
+
+      <section className="connect fade-up" aria-labelledby="connect-heading">
+        <div className="connectInner">
+          <h2 id="connect-heading">Connect</h2>
+
+          <div className="socialList">
+            {socialLinks.map(({ name, href, icon: Icon }) => (
+              <a href={href} key={name} target="_blank" rel="noreferrer">
+                <Icon size={19} strokeWidth={2.2} />
+                <span>{name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </section>
 
       <footer>
