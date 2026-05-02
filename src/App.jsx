@@ -86,6 +86,7 @@ export default function App() {
           <a href="#listings">Listings</a>
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
+          <a href="#connect">Connect</a>
         </nav>
         <a className="navButton" href="#contact">Book Appraisal</a>
       </header>
@@ -208,7 +209,7 @@ export default function App() {
         </form>
       </section>
 
-      <section className="connect fade-up" aria-labelledby="connect-heading">
+      <section id="connect" className="connect" aria-labelledby="connect-heading">
         <div className="connectInner">
           <h2 id="connect-heading">Connect</h2>
 
