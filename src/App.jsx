@@ -7,10 +7,10 @@ import {
   Mail,
   MapPin,
   ArrowRight,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Youtube,
+  Users,
+  Camera,
+  BriefcaseBusiness,
+  Play,
 } from "lucide-react";
 import "./App.css";
 
@@ -45,10 +45,10 @@ const properties = [
 ];
 
 const socialLinks = [
-  { name: "Facebook", href: "https://www.facebook.com/", icon: Facebook },
-  { name: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
-  { name: "LinkedIn", href: "https://www.linkedin.com/", icon: Linkedin },
-  { name: "YouTube", href: "https://www.youtube.com/", icon: Youtube },
+  { name: "Facebook", href: "https://www.facebook.com/", icon: Users },
+  { name: "Instagram", href: "https://www.instagram.com/", icon: Camera },
+  { name: "LinkedIn", href: "https://www.linkedin.com/", icon: BriefcaseBusiness },
+  { name: "YouTube", href: "https://www.youtube.com/", icon: Play },
 ];
 
 export default function App() {
@@ -62,7 +62,7 @@ export default function App() {
             entry.target.classList.add("show");
           }
         });
-      }, // ✅ IMPORTANT comma here
+      },
       { threshold: 0.1 }
     );
 
@@ -227,7 +227,7 @@ export default function App() {
       <footer>
         <div className="brand"><span>HD</span> ESTATE</div>
         <p>High Definition Living Starts Here</p>
-        <small>© 2026 HD Estate. All rights reserved.</small>
+        <small>&copy; 2026 HD Estate. All rights reserved.</small>
       </footer>
     </div>
   );
