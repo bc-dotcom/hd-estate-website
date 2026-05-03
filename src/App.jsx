@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BedDouble,
   Bath,
@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Users,
   Camera,
+  Upload,
 } from "lucide-react";
 import "./App.css";
 
@@ -50,7 +51,7 @@ const socialLinks = [
 const browseLinks = [
   { name: "About us", href: "#about" },
   { name: "Sell your property", href: "#contact" },
-  { name: "Customer feedback", href: "#contact" },
+  { name: "Customer feedback", action: "feedback" },
 ];
 
 const termsLinks = [
@@ -78,6 +79,8 @@ const propertyActions = [
 ];
 
 export default function App() {
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-up");
 
@@ -292,7 +295,18 @@ export default function App() {
         <div className="footerColumn">
           <h2>Browse</h2>
           {browseLinks.map((link) => (
-            <a href={link.href} key={link.name}>{link.name}</a>
+            link.action === "feedback" ? (
+              <button
+                className="footerTextButton"
+                type="button"
+                onClick={() => setIsFeedbackOpen(true)}
+                key={link.name}
+              >
+                {link.name}
+              </button>
+            ) : (
+              <a href={link.href} key={link.name}>{link.name}</a>
+            )
           ))}
         </div>
 
@@ -313,6 +327,63 @@ export default function App() {
           ))}
         </div>
       </footer>
+
+      {isFeedbackOpen && (
+        <div className="feedbackOverlay" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+          <div className="feedbackModal">
+            <button
+              className="feedbackClose"
+              type="button"
+              aria-label="Close feedback form"
+              onClick={() => setIsFeedbackOpen(false)}
+            >
+              ×
+            </button>
+
+            <div className="feedbackInfo">
+              <p className="eyebrow">Customer Feedback</p>
+              <h2 id="feedback-title">Lodge feedback</h2>
+              <p>
+                Tell us about your experience with HD Estate. Include the property, service or team member
+                involved if it helps us review your feedback properly.
+              </p>
+
+              <ul>
+                <li>Your name and contact details</li>
+                <li>The property address, if relevant</li>
+                <li>Details of your feedback or concern</li>
+                <li>Any supporting information</li>
+              </ul>
+            </div>
+
+            <form className="feedbackForm">
+              <input placeholder="Full name" />
+              <input placeholder="Email address" />
+              <input placeholder="Phone number" />
+              <input placeholder="Property address, if relevant" />
+              <label className="feedbackField">
+                <span>Please provide your feedback</span>
+                <small>
+                  If your feedback exceeds 2,000 characters or includes an email thread as evidence,
+                  please attach it as a document below.
+                </small>
+                <textarea maxLength="2000" placeholder="Tell us about your experience"></textarea>
+                <em>0/2000</em>
+              </label>
+              <label className="fileUpload">
+                <span>Attach File</span>
+                <small>Please upload any relevant file(s) if applicable</small>
+                <input type="file" multiple />
+                <div>
+                  <Upload size={34} strokeWidth={1.8} />
+                  <p><strong>Choose a file to upload</strong> <span>or drag and drop here</span></p>
+                </div>
+              </label>
+              <button className="feedbackSubmit" type="button">Submit Feedback</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
