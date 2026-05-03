@@ -9,8 +9,6 @@ import {
   ArrowRight,
   Users,
   Camera,
-  BriefcaseBusiness,
-  Play,
 } from "lucide-react";
 import "./App.css";
 
@@ -47,8 +45,18 @@ const properties = [
 const socialLinks = [
   { name: "Facebook", href: "https://www.facebook.com/", icon: Users },
   { name: "Instagram", href: "https://www.instagram.com/", icon: Camera },
-  { name: "LinkedIn", href: "https://www.linkedin.com/", icon: BriefcaseBusiness },
-  { name: "YouTube", href: "https://www.youtube.com/", icon: Play },
+];
+
+const browseLinks = [
+  { name: "About us", href: "#about" },
+  { name: "Sell your property", href: "#contact" },
+  { name: "Customer feedback", href: "#contact" },
+];
+
+const termsLinks = [
+  { name: "Legal information", href: "#contact" },
+  { name: "Collection notice", href: "#contact" },
+  { name: "Anti Money laundering", href: "#contact" },
 ];
 
 const propertyActions = [
@@ -105,7 +113,7 @@ export default function App() {
           <a href="#listings">Listings</a>
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
-          <a href="#connect">Connect</a>
+          <a href="#footer-connect">Connect</a>
         </nav>
         <a className="navButton" href="#contact">Book Appraisal</a>
       </header>
@@ -260,21 +268,6 @@ export default function App() {
           <p><Phone size={18} /> 0420 200 969</p>
           <p><Mail size={18} /> Work email to be confirmed</p>
           <p><MapPin size={18} /> Sydney, NSW</p>
-
-          <div id="connect" className="connect" aria-labelledby="connect-heading">
-            <div className="connectInner">
-              <h2 id="connect-heading">Connect</h2>
-
-              <div className="socialList">
-                {socialLinks.map(({ name, href, icon: Icon }) => (
-                  <a href={href} key={name} target="_blank" rel="noreferrer">
-                    <Icon size={19} strokeWidth={2.2} />
-                    <span>{name}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
 
         <form>
@@ -287,12 +280,38 @@ export default function App() {
       </section>
 
       <footer>
-        <a className="brand footerBrand" href="#home" aria-label="HD Estate home">
-          <img src="/hd-estate-logo-white.png" alt="" />
-          <span className="brandName"><strong>HD</strong> ESTATE</span>
-        </a>
-        <p>High Definition Living Starts Here</p>
-        <small>&copy; 2026 HD Estate. All rights reserved.</small>
+        <div className="footerIntro">
+          <a className="brand footerBrand" href="#home" aria-label="HD Estate home">
+            <img src="/hd-estate-logo-white.png" alt="" />
+            <span className="brandName"><strong>HD</strong> ESTATE</span>
+          </a>
+          <p>High Definition Living Starts Here</p>
+          <small>&copy; 2026 HD Estate. All rights reserved.</small>
+        </div>
+
+        <div className="footerColumn">
+          <h2>Browse</h2>
+          {browseLinks.map((link) => (
+            <a href={link.href} key={link.name}>{link.name}</a>
+          ))}
+        </div>
+
+        <div className="footerColumn">
+          <h2>Terms</h2>
+          {termsLinks.map((link) => (
+            <a href={link.href} key={link.name}>{link.name}</a>
+          ))}
+        </div>
+
+        <div id="footer-connect" className="footerColumn footerSocial">
+          <h2>Connect</h2>
+          {socialLinks.map(({ name, href, icon: Icon }) => (
+            <a href={href} key={name} target="_blank" rel="noreferrer">
+              <Icon size={18} strokeWidth={2.1} />
+              <span>{name}</span>
+            </a>
+          ))}
+        </div>
       </footer>
     </div>
   );

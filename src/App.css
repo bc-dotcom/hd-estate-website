@@ -83,6 +83,14 @@ body {
   height: 78px;
 }
 
+.footerIntro .footerBrand img {
+  width: 96px;
+  height: 66px;
+  padding: 6px;
+  background: #111;
+  border-radius: 4px;
+}
+
 nav {
   display: flex;
   gap: 34px;
@@ -670,18 +678,78 @@ button {
 }
 
 footer {
-  padding: 55px 6%;
-  background: #000;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  display: grid;
+  grid-template-columns: 1.1fr 0.65fr 0.85fr 0.65fr;
+  gap: 54px;
+  padding: 54px 6% 46px;
+  background: #f5f5f2;
+  color: #111;
+  border-top: 1px solid #d7d7d0;
 }
 
-footer p {
-  margin: 14px 0;
-  color: #cfcfcf;
+.footerIntro {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: 1px solid #d2d2ca;
+  padding-right: 46px;
 }
 
-footer small {
-  color: #999;
+.footerIntro .brandName {
+  color: #111;
+}
+
+.footerIntro .brandName strong {
+  background: #111;
+  color: #ffffff;
+}
+
+.footerIntro p {
+  max-width: 260px;
+  margin: 32px 0 auto;
+  color: #5f5f5a;
+  line-height: 1.7;
+}
+
+.footerIntro small {
+  color: #5f5f5a;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footerColumn h2 {
+  margin-bottom: 30px;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 7px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.footerColumn a {
+  color: #5f5f5a;
+  font-size: 18px;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footerColumn a:hover {
+  color: #111;
+  transform: translateX(3px);
+}
+
+.footerSocial a {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
 }
 
 @media (max-width: 900px) {
@@ -718,8 +786,25 @@ footer small {
 
   .about,
   .serviceGrid,
-  .contact {
+  .contact,
+  footer {
     grid-template-columns: 1fr;
+  }
+
+  footer {
+    gap: 34px;
+  }
+
+  .footerIntro {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid #d2d2ca;
+    padding-right: 0;
+    padding-bottom: 34px;
+  }
+
+  .footerIntro p {
+    margin: 24px 0 28px;
   }
 
   .listingSplit {
