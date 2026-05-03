@@ -51,6 +51,24 @@ const socialLinks = [
   { name: "YouTube", href: "https://www.youtube.com/", icon: Play },
 ];
 
+const propertyActions = [
+  {
+    label: "Lease",
+    video: "https://www.pexels.com/download/video/4301616/",
+    fallback: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1100&q=80",
+  },
+  {
+    label: "Buy",
+    video: "https://www.pexels.com/download/video/15887298/",
+    fallback: "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1100&q=80",
+  },
+  {
+    label: "Sell",
+    video: "https://www.pexels.com/download/video/16641481/",
+    fallback: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1100&q=80",
+  },
+];
+
 export default function App() {
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-up");
@@ -136,25 +154,54 @@ export default function App() {
       </section>
 
       <section id="listings" className="section listings">
-        <p className="eyebrow center">Featured Listings</p>
-        <h2 className="center">Properties for sale and rent</h2>
+        <div className="listingSplit">
+          <div className="listingActions" aria-label="Property options">
+            {propertyActions.map((action) => (
+              <a
+                className="listingAction"
+                href="#contact"
+                key={action.label}
+                style={{ backgroundImage: `url(${action.fallback})` }}
+              >
+                <video
+                  className="listingActionVideo"
+                  src={action.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                />
+                <span>{action.label}</span>
+              </a>
+            ))}
+          </div>
 
-        <div className="propertyGrid">
-          {properties.map((property) => (
-            <div className="propertyCard" key={property.title}>
-              <img src={property.image} alt={property.title} />
-              <div className="propertyBody">
-                <h3>{property.price}</h3>
-                <h4>{property.title}</h4>
-                <p>{property.location}</p>
-                <div className="features">
-                  <span><BedDouble size={17} /> {property.beds}</span>
-                  <span><Bath size={17} /> {property.baths}</span>
-                  <span><Car size={17} /> {property.cars}</span>
+          <div className="listingDivider" aria-hidden="true"></div>
+
+          <div className="listingContent">
+            <p className="eyebrow">Featured Listings</p>
+            <h2>Properties for sale and rent</h2>
+
+            <div className="propertyGrid">
+              {properties.map((property) => (
+                <div className="propertyCard" key={property.title}>
+                  <img src={property.image} alt={property.title} />
+                  <div className="propertyBody">
+                    <h3>{property.price}</h3>
+                    <h4>{property.title}</h4>
+                    <p>{property.location}</p>
+                    <div className="features">
+                      <span><BedDouble size={17} /> {property.beds}</span>
+                      <span><Bath size={17} /> {property.baths}</span>
+                      <span><Car size={17} /> {property.cars}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
