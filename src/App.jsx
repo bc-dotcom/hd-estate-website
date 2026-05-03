@@ -183,9 +183,23 @@ export default function App() {
       </section>
 
       <section className="cta fade-up">
-        <h2>Ready to understand your property value?</h2>
-        <p>Book a free appraisal and speak with HD Estate today.</p>
-        <a href="#contact">Get Free Appraisal <ArrowRight size={18} /></a>
+        <div className="ctaSlider">
+          <img src="/images/sydney1.png" alt="Sydney suburb view" />
+          <img src="/images/sydney2.png" alt="Sydney suburb homes" />
+          <img src="/images/sydney3.png" alt="Sydney harbour view" />
+          <img src="/images/sydney4.png" alt="Sydney residential area" />
+          <img src="/images/sydney5.png" alt="Sydney city and suburbs" />
+        </div>
+
+        <div className="ctaOverlay"></div>
+
+        <div className="ctaContent">
+          <h2>Ready to understand your property value?</h2>
+          <p>Book a free appraisal and speak with HD Estate today.</p>
+          <a href="#contact" className="primaryBtn">
+            Get Free Appraisal <ArrowRight size={18} />
+          </a>
+        </div>
       </section>
 
       <section id="contact" className="section contact fade-up">
