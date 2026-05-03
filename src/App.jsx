@@ -80,6 +80,7 @@ const propertyActions = [
 
 export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-up");
@@ -367,8 +368,13 @@ export default function App() {
                   If your feedback exceeds 2,000 characters or includes an email thread as evidence,
                   please attach it as a document below.
                 </small>
-                <textarea maxLength="2000" placeholder="Tell us about your experience"></textarea>
-                <em>0/2000</em>
+                <textarea
+                  maxLength="2000"
+                  placeholder="Tell us about your experience"
+                  value={feedbackMessage}
+                  onChange={(event) => setFeedbackMessage(event.target.value)}
+                ></textarea>
+                <em>{feedbackMessage.length}/2000</em>
               </label>
               <label className="fileUpload">
                 <span>Attach File</span>
