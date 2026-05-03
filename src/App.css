@@ -47,15 +47,15 @@ body {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: white;
   text-decoration: none;
 }
 
 .brand img {
   display: block;
-  width: 40px;
-  height: 42px;
+  width: 84px;
+  height: 58px;
   object-fit: contain;
 }
 
@@ -79,8 +79,8 @@ body {
 }
 
 .footerBrand img {
-  width: 50px;
-  height: 54px;
+  width: 112px;
+  height: 78px;
 }
 
 nav {
@@ -609,8 +609,8 @@ footer small {
   }
 
   .brand img {
-    width: 36px;
-    height: 38px;
+    width: 68px;
+    height: 48px;
   }
 
   .brandName {

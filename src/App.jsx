@@ -79,7 +79,7 @@ export default function App() {
     <div className="site">
       <header className="navbar">
         <a className="brand" href="#home" aria-label="HD Estate home">
-          <img src="/hd-estate-mark-white.png" alt="" />
+          <img src="/hd-estate-logo-white.png" alt="" />
           <span className="brandName"><strong>HD</strong> ESTATE</span>
         </a>
         <nav>
@@ -241,7 +241,7 @@ export default function App() {
 
       <footer>
         <a className="brand footerBrand" href="#home" aria-label="HD Estate home">
-          <img src="/hd-estate-mark-white.png" alt="" />
+          <img src="/hd-estate-logo-white.png" alt="" />
           <span className="brandName"><strong>HD</strong> ESTATE</span>
         </a>
         <p>High Definition Living Starts Here</p>
