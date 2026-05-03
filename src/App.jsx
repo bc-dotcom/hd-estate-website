@@ -92,12 +92,16 @@ export default function App() {
       </header>
 
       <section className="hero" id="home">
+<<<<<<< HEAD
         <div className="heroBackdrop" aria-hidden="true">
           <span className="heroSlide slideOne"></span>
           <span className="heroSlide slideTwo"></span>
           <span className="heroSlide slideThree"></span>
         </div>
         <div className="heroInner">
+=======
+        <div className="heroInner hero-content">
+>>>>>>> 2ef98bc (Update CTA image slider)
           <p className="eyebrow">Sydney Real Estate Agency</p>
 
           <h1>Local Knowledge. Strong Results.</h1>
@@ -115,7 +119,7 @@ export default function App() {
             Looking to buy, sell, lease or manage a property? Speak with HD Estate today.
           </p>
 
-          <div className="heroActions">
+          <div className="heroActions hero-buttons">
             <a href="#contact" className="primaryBtn">Book an Appraisal</a>
             <a href="#listings" className="secondaryBtn">View Listings</a>
             <a href="#contact" className="secondaryBtn">Contact Us</a>
@@ -182,10 +186,29 @@ export default function App() {
       </section>
 
       <section className="cta fade-up">
-        <h2>Ready to understand your property value?</h2>
-        <p>Book a free appraisal and speak with HD Estate today.</p>
-        <a href="#contact">Get Free Appraisal <ArrowRight size={18} /></a>
-      </section>
+  
+        {/* 🔥 SLIDING IMAGES */}
+        <div className="ctaSlider">
+          <img src="/images/sydney1.png" />
+          <img src="/images/sydney2.png" />
+          <img src="/images/sydney3.png" />
+          <img src="/images/sydney4.png" />
+          <img src="/images/sydney5.png" />
+        </div>
+
+        {/* overlay */}
+        <div className="ctaOverlay"></div>
+
+        {/* text */}
+        <div className="ctaContent">
+          <h2>Ready to understand your property value?</h2>
+          <p>Book a free appraisal and speak with HD Estate today.</p>
+          <a href="#contact" className="primaryBtn">
+            Get Free Appraisal <ArrowRight size={18} />
+          </a>
+        </div>
+
+</section>
 
       <section id="contact" className="section contact fade-up">
         <div>
@@ -232,3 +255,22 @@ export default function App() {
     </div>
   );
 }
+<<<<<<< HEAD
+=======
+
+<section className="cta">
+  <div className="ctaSlider">
+    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1900&q=80" />
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1900&q=80" />
+    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1900&q=80" />
+  </div>
+
+  <div className="ctaOverlay"></div>
+
+  <div className="ctaContent">
+    <h2>Ready to understand your property value?</h2>
+    <p>Book a free appraisal and speak with HD Estate today.</p>
+    <a href="#contact">Get Free Appraisal →</a>
+  </div>
+</section>
+>>>>>>> 2ef98bc (Update CTA image slider)
