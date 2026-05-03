@@ -78,9 +78,10 @@ export default function App() {
   return (
     <div className="site">
       <header className="navbar">
-        <div className="brand">
-          <span>HD</span> ESTATE
-        </div>
+        <a className="brand" href="#home" aria-label="HD Estate home">
+          <img src="/hd-estate-logo.png" alt="" />
+          <span className="brandText">HD Estate</span>
+        </a>
         <nav>
           <a href="#about">About</a>
           <a href="#listings">Listings</a>
@@ -225,7 +226,10 @@ export default function App() {
       </section>
 
       <footer>
-        <div className="brand"><span>HD</span> ESTATE</div>
+        <a className="brand footerBrand" href="#home" aria-label="HD Estate home">
+          <img src="/hd-estate-logo.png" alt="" />
+          <span className="brandText">HD Estate</span>
+        </a>
         <p>High Definition Living Starts Here</p>
         <small>&copy; 2026 HD Estate. All rights reserved.</small>
       </footer>
