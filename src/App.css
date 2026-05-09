@@ -771,6 +771,74 @@ footer {
   gap: 16px;
 }
 
+.legalPage {
+  padding-top: 104px;
+  background: #f5f5f2;
+  color: #111;
+}
+
+.legalHero {
+  padding: 58px 6% 0;
+}
+
+.legalPageTitle {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.legalPageTitle > div {
+  grid-column: 2;
+  text-align: center;
+}
+
+.legalPageTitle h1 {
+  margin-top: 12px;
+  color: #222;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.legalPageTitle a {
+  justify-self: end;
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.legalHero img {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 52vw, 640px);
+  object-fit: cover;
+}
+
+.legalContent {
+  padding: 64px 6% 78px;
+}
+
+.legalCopy {
+  width: min(820px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+  text-align: left;
+}
+
+.legalCopy p {
+  width: 100%;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.85;
+  text-align: justify;
+  text-wrap: pretty;
+}
+
 .feedbackOverlay {
   position: fixed;
   inset: 0;
@@ -977,6 +1045,27 @@ footer {
 
   .footerIntro p {
     margin: 24px 0 28px;
+  }
+
+  .legalPage {
+    padding-top: 82px;
+  }
+
+  .legalHero {
+    padding: 42px 24px 0;
+  }
+
+  .legalPageTitle {
+    display: grid;
+    align-items: start;
+  }
+
+  .legalHero img {
+    height: 330px;
+  }
+
+  .legalContent {
+    padding: 44px 24px 64px;
   }
 
   .feedbackModal {

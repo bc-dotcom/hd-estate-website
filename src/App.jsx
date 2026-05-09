@@ -55,8 +55,8 @@ const browseLinks = [
 ];
 
 const termsLinks = [
-  { name: "Legal information", href: "#contact" },
-  { name: "Collection notice", href: "#contact" },
+  { name: "Legal information", action: "legal" },
+  { name: "Collection notice", action: "collection" },
   { name: "Anti Money laundering", href: "#contact" },
 ];
 
@@ -80,7 +80,46 @@ const propertyActions = [
 
 export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [legalPage, setLegalPage] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+
+  const showHomePage = () => {
+    setLegalPage(null);
+  };
+
+  const showTermsPage = (page) => {
+    setLegalPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const legalPages = {
+    legal: {
+      eyebrow: "Terms",
+      title: "Legal information",
+      image: "/images/sydney2.png",
+      imageAlt: "Sydney residential property",
+      paragraphs: [
+        "The information provided on this website is for general informational purposes only and does not constitute legal, financial, or real estate advice. While HD Estate makes every effort to ensure the accuracy and reliability of the information presented, we make no guarantees, representations, or warranties of any kind, express or implied, about the completeness, accuracy, or suitability of the content.",
+        "All property listings, pricing, and availability are subject to change without notice. Interested parties should make their own enquiries and seek independent legal advice before making any decisions relating to property investments, leasing, or transactions.",
+        "HD Estate will not be held liable for any loss, damage, or inconvenience arising from the use of, or reliance on, the information contained on this website.",
+      ],
+    },
+    collection: {
+      eyebrow: "Terms",
+      title: "Collection notice",
+      image: "/images/sydney3.png",
+      imageAlt: "Sydney city and suburbs",
+      paragraphs: [
+        "HD Estate collects, uses, and discloses personal information in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles.",
+        "We collect personal information necessary to provide our real estate and property management services, including responding to enquiries, managing properties, and processing applications. This may include your name, contact details, identification, and relevant financial information. Where required, we may also collect information from third parties such as referees or employers.",
+        "Your information may be disclosed to landlords, tenants, contractors, service providers, and government authorities (including NSW Fair Trading) where necessary or required by law. If you do not provide this information, we may be unable to deliver our services.",
+        "By submitting your details or engaging with HD Estate, you consent to the collection, use, and disclosure of your personal information for these purposes.",
+        "You may request access to or correction of your personal information at any time by contacting us.",
+      ],
+    },
+  };
+
+  const currentLegalPage = legalPage ? legalPages[legalPage] : null;
 
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-up");
@@ -108,20 +147,43 @@ export default function App() {
   return (
     <div className="site">
       <header className="navbar">
-        <a className="brand" href="#home" aria-label="HD Estate home">
+        <a className="brand" href="#home" aria-label="HD Estate home" onClick={showHomePage}>
           <img src="/hd-estate-logo-white.png" alt="" />
           <span className="brandName"><strong>HD</strong> ESTATE</span>
         </a>
         <nav>
-          <a href="#about">About</a>
-          <a href="#listings">Listings</a>
-          <a href="#services">Services</a>
-          <a href="#contact">Contact</a>
-          <a href="#footer-connect">Connect</a>
+          <a href="#about" onClick={showHomePage}>About</a>
+          <a href="#listings" onClick={showHomePage}>Listings</a>
+          <a href="#services" onClick={showHomePage}>Services</a>
+          <a href="#contact" onClick={showHomePage}>Contact</a>
+          <a href="#footer-connect" onClick={showHomePage}>Connect</a>
         </nav>
-        <a className="navButton" href="#contact">Book Appraisal</a>
+        <a className="navButton" href="#contact" onClick={showHomePage}>Book Appraisal</a>
       </header>
 
+      {currentLegalPage ? (
+        <main className="legalPage">
+          <section className="legalHero">
+            <div className="legalPageTitle">
+              <div>
+                <p className="eyebrow">{currentLegalPage.eyebrow}</p>
+                <h1>{currentLegalPage.title}</h1>
+              </div>
+              <a href="#legal-content">View below</a>
+            </div>
+            <img src={currentLegalPage.image} alt={currentLegalPage.imageAlt} />
+          </section>
+
+          <section id="legal-content" className="legalContent">
+            <div className="legalCopy">
+              {currentLegalPage.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        </main>
+      ) : (
+        <>
       <section className="hero" id="home">
         <div className="heroBackdrop" aria-hidden="true">
           <span className="heroSlide slideOne"></span>
@@ -295,10 +357,12 @@ export default function App() {
           <button type="button">Send Enquiry</button>
         </form>
       </section>
+        </>
+      )}
 
       <footer>
         <div className="footerIntro">
-          <a className="brand footerBrand" href="#home" aria-label="HD Estate home">
+          <a className="brand footerBrand" href="#home" aria-label="HD Estate home" onClick={showHomePage}>
             <img src="/hd-estate-logo-white.png" alt="" />
             <span className="brandName"><strong>HD</strong> ESTATE</span>
           </a>
@@ -319,7 +383,7 @@ export default function App() {
                 {link.name}
               </button>
             ) : (
-              <a href={link.href} key={link.name}>{link.name}</a>
+              <a href={link.href} onClick={showHomePage} key={link.name}>{link.name}</a>
             )
           ))}
         </div>
@@ -327,7 +391,18 @@ export default function App() {
         <div className="footerColumn">
           <h2>Terms</h2>
           {termsLinks.map((link) => (
-            <a href={link.href} key={link.name}>{link.name}</a>
+            link.action ? (
+              <button
+                className="footerTextButton"
+                type="button"
+                onClick={() => showTermsPage(link.action)}
+                key={link.name}
+              >
+                {link.name}
+              </button>
+            ) : (
+              <a href={link.href} onClick={showHomePage} key={link.name}>{link.name}</a>
+            )
           ))}
         </div>
 
