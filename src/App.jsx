@@ -10,6 +10,8 @@ import {
   Users,
   Camera,
   Upload,
+  Search,
+  SlidersHorizontal,
 } from "lucide-react";
 import "./App.css";
 
@@ -24,6 +26,15 @@ const properties = [
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
   },
   {
+    price: "$980,000",
+    title: "Updated Brick Home",
+    location: "Parramatta, NSW",
+    beds: 3,
+    baths: 2,
+    cars: 1,
+    image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
     price: "$680 per week",
     title: "Stylish Apartment Living",
     location: "Granville, NSW",
@@ -33,6 +44,15 @@ const properties = [
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
   },
   {
+    price: "$720 per week",
+    title: "Townhouse Near Station",
+    location: "Guildford, NSW",
+    beds: 3,
+    baths: 2,
+    cars: 2,
+    image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
     price: "Contact Agent",
     title: "Investment Opportunity",
     location: "Merrylands, NSW",
@@ -40,6 +60,15 @@ const properties = [
     baths: 1,
     cars: 1,
     image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    price: "$1,080,000",
+    title: "Family Home With Outdoor Space",
+    location: "Guildford, NSW",
+    beds: 4,
+    baths: 2,
+    cars: 2,
+    image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1400&q=80",
   },
 ];
 
@@ -71,6 +100,14 @@ const getLegalPageFromPath = () => {
   return Object.keys(legalPagePaths).find((page) => legalPagePaths[page] === path) || null;
 };
 
+const getPropertySearchFromPath = () => {
+  if (window.location.pathname !== "/properties") {
+    return null;
+  }
+
+  return new URLSearchParams(window.location.search).get("area") || "";
+};
+
 const propertyActions = [
   {
     label: "Lease",
@@ -92,11 +129,14 @@ const propertyActions = [
 export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [legalPage, setLegalPage] = useState(getLegalPageFromPath);
+  const [propertySearch, setPropertySearch] = useState(getPropertySearchFromPath);
+  const [searchInput, setSearchInput] = useState(getPropertySearchFromPath() || "");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
   const showHomePage = (event, hash = "#home") => {
     event?.preventDefault();
     setLegalPage(null);
+    setPropertySearch(null);
 
     if (window.location.pathname !== "/" || window.location.hash !== hash) {
       window.history.pushState(null, "", `/${hash}`);
@@ -109,8 +149,27 @@ export default function App() {
 
   const showTermsPage = (page) => {
     setLegalPage(page);
+    setPropertySearch(null);
     window.history.pushState({ legalPage: page }, "", legalPagePaths[page]);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const showPropertyResults = (area) => {
+    const cleanArea = area.trim();
+    setLegalPage(null);
+    setPropertySearch(cleanArea);
+    setSearchInput(cleanArea);
+    window.history.pushState(
+      { propertySearch: cleanArea },
+      "",
+      `/properties${cleanArea ? `?area=${encodeURIComponent(cleanArea)}` : ""}`
+    );
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handlePropertySearch = (event) => {
+    event.preventDefault();
+    showPropertyResults(searchInput);
   };
 
   const legalPages = {
@@ -153,10 +212,17 @@ export default function App() {
   };
 
   const currentLegalPage = legalPage ? legalPages[legalPage] : null;
+  const filteredProperties = propertySearch
+    ? properties.filter((property) =>
+        `${property.location} ${property.title}`.toLowerCase().includes(propertySearch.toLowerCase())
+      )
+    : properties;
 
   useEffect(() => {
     const handlePopState = () => {
       setLegalPage(getLegalPageFromPath());
+      setPropertySearch(getPropertySearchFromPath());
+      setSearchInput(getPropertySearchFromPath() || "");
       window.scrollTo({ top: 0 });
     };
 
@@ -225,6 +291,65 @@ export default function App() {
             </div>
           </section>
         </main>
+      ) : propertySearch !== null ? (
+        <main className="resultsPage">
+          <section className="resultsSearchSection">
+            <form className="resultsSearchBar" onSubmit={handlePropertySearch}>
+              <Search size={18} strokeWidth={2} />
+              <input
+                value={searchInput}
+                onChange={(event) => setSearchInput(event.target.value)}
+                placeholder="Search suburb or area"
+              />
+              <button className="filterBtn" type="button">
+                <SlidersHorizontal size={16} /> Filters
+              </button>
+              <button className="searchPill" type="submit">Search</button>
+            </form>
+          </section>
+
+          <section className="resultsControls">
+            <div>
+              {propertySearch && <span className="areaChip">{propertySearch}</span>}
+              <p>
+                Showing {filteredProperties.length} of {properties.length} listings
+                {propertySearch ? ` for ${propertySearch}` : ""}
+              </p>
+            </div>
+            <div className="resultsFilterGroup" aria-label="Listing filters">
+              <button type="button">Buy</button>
+              <button type="button">Rent</button>
+              <button type="button">Price</button>
+              <button type="button">Beds</button>
+            </div>
+          </section>
+
+          <section className="resultsGrid" aria-label="Property search results">
+            {filteredProperties.length > 0 ? (
+              filteredProperties.map((property) => (
+                <article className="propertyCard resultCard" key={`${property.title}-${property.location}`}>
+                  <img src={property.image} alt={property.title} />
+                  <div className="propertyBody">
+                    <span className="propertyType">House</span>
+                    <h3>{property.price}</h3>
+                    <h4>{property.title}</h4>
+                    <p>{property.location}</p>
+                    <div className="features">
+                      <span><BedDouble size={17} /> {property.beds}</span>
+                      <span><Bath size={17} /> {property.baths}</span>
+                      <span><Car size={17} /> {property.cars}</span>
+                    </div>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <div className="noResults">
+                <h2>No listings found</h2>
+                <p>Try searching another Sydney suburb or area.</p>
+              </div>
+            )}
+          </section>
+        </main>
       ) : (
         <>
       <section className="hero" id="home">
@@ -242,10 +367,14 @@ export default function App() {
             High Definition Living Starts Here
           </p>
 
-          <div className="appraisalBox">
-            <input placeholder="Start typing your property address" />
-            <button>Find Out</button>
-          </div>
+          <form className="appraisalBox" onSubmit={handlePropertySearch}>
+            <input
+              value={searchInput}
+              onChange={(event) => setSearchInput(event.target.value)}
+              placeholder="Search suburb or area"
+            />
+            <button type="submit">Search</button>
+          </form>
 
           <p className="heroSmallText">
             Looking to buy, sell, lease or manage a property? Speak with HD Estate today.
