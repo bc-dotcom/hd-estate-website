@@ -157,12 +157,25 @@ export default function App() {
       <section id="about" className="section about fade-up">
         <div>
           <p className="eyebrow">About HD Estate</p>
-          <h2>Modern property service with local Sydney knowledge.</h2>
+          <h2>This is where high-definition living starts.</h2>
         </div>
-        <p>
-          HD Estate focuses on clear communication, strong market knowledge and client-focused results.
-          Whether you are selling, leasing, buying or investing, we help you move forward with confidence.
-        </p>
+        <div className="aboutCopy">
+          <p>
+            HD Estate is a professional real estate agency based in Guildford, proudly servicing all Sydney
+            suburbs. We specialise in property management and residential sales, delivering reliable,
+            transparent, and results-driven service to property owners, investors, and sellers.
+          </p>
+          <p>
+            Built on years of industry experience, HD Estate was created to provide a more personalised and
+            dependable approach to real estate. From proactive property management to strategic sales
+            campaigns, we are committed to maximising property value and achieving the best possible outcomes
+            for our clients.
+          </p>
+          <p>
+            At HD Estate, we focus on strong communication, professionalism, and long-term relationships built
+            on trust, performance, and results.
+          </p>
+        </div>
       </section>
 
       <section id="listings" className="section listings">

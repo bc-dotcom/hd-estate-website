@@ -376,6 +376,10 @@ h2 {
   font-size: 17px;
 }
 
+.aboutCopy {
+  display: grid;
+  gap: 18px;
+}
 
 .center {
   text-align: center;
