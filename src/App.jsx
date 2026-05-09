@@ -118,12 +118,14 @@ const propertyActions = [
   {
     label: "Sell",
     slug: "sell",
+    enquiry: true,
     video: "https://www.pexels.com/download/video/16641481/",
     fallback: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1100&q=80",
   },
   {
     label: "Lease",
     slug: "lease",
+    enquiry: true,
     video: "https://www.pexels.com/download/video/4301616/",
     fallback: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1100&q=80",
   },
@@ -479,9 +481,17 @@ export default function App() {
             {propertyActions.map((action) => (
               <a
                 className="listingAction"
-                href={`/enquiry/${action.slug}`}
+                href={action.enquiry ? `/enquiry/${action.slug}` : "/properties"}
                 key={action.label}
-                onClick={(event) => showEnquiryPage(event, action.slug)}
+                onClick={(event) => {
+                  if (action.enquiry) {
+                    showEnquiryPage(event, action.slug);
+                    return;
+                  }
+
+                  event.preventDefault();
+                  showPropertyResults("");
+                }}
                 style={{ backgroundImage: `url(${action.fallback})` }}
               >
                 <video
