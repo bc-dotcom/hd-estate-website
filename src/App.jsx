@@ -57,8 +57,19 @@ const browseLinks = [
 const termsLinks = [
   { name: "Legal information", action: "legal" },
   { name: "Collection notice", action: "collection" },
-  { name: "Anti Money laundering", href: "#contact" },
+  { name: "Anti Money laundering", action: "antiMoneyLaundering" },
 ];
+
+const legalPagePaths = {
+  legal: "/legal-information",
+  collection: "/collection-notice",
+  antiMoneyLaundering: "/anti-money-laundering",
+};
+
+const getLegalPageFromPath = () => {
+  const path = window.location.pathname;
+  return Object.keys(legalPagePaths).find((page) => legalPagePaths[page] === path) || null;
+};
 
 const propertyActions = [
   {
@@ -80,15 +91,25 @@ const propertyActions = [
 
 export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [legalPage, setLegalPage] = useState(null);
+  const [legalPage, setLegalPage] = useState(getLegalPageFromPath);
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  const showHomePage = () => {
+  const showHomePage = (event, hash = "#home") => {
+    event?.preventDefault();
     setLegalPage(null);
+
+    if (window.location.pathname !== "/" || window.location.hash !== hash) {
+      window.history.pushState(null, "", `/${hash}`);
+    }
+
+    requestAnimationFrame(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+    });
   };
 
   const showTermsPage = (page) => {
     setLegalPage(page);
+    window.history.pushState({ legalPage: page }, "", legalPagePaths[page]);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -117,9 +138,31 @@ export default function App() {
         "You may request access to or correction of your personal information at any time by contacting us.",
       ],
     },
+    antiMoneyLaundering: {
+      eyebrow: "Terms",
+      title: "Anti Money laundering",
+      image: "/images/sydney4.png",
+      imageAlt: "Sydney residential area",
+      paragraphs: [
+        "HD Estate is committed to complying with all applicable anti-money laundering and counter-terrorism financing obligations under Australian law.",
+        "As part of this commitment, we may be required to verify the identity of our clients, collect and retain certain personal information, and conduct due diligence on transactions. We may also be required to report certain matters to relevant authorities where mandated by law.",
+        "By engaging our services, you agree to provide accurate and complete information as reasonably requested to enable us to meet our legal and regulatory obligations. Failure to do so may result in delays or an inability to provide services.",
+        "All information collected for compliance purposes is handled in accordance with our privacy obligations.",
+      ],
+    },
   };
 
   const currentLegalPage = legalPage ? legalPages[legalPage] : null;
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setLegalPage(getLegalPageFromPath());
+      window.scrollTo({ top: 0 });
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-up");
@@ -147,18 +190,18 @@ export default function App() {
   return (
     <div className="site">
       <header className="navbar">
-        <a className="brand" href="#home" aria-label="HD Estate home" onClick={showHomePage}>
+        <a className="brand" href="#home" aria-label="HD Estate home" onClick={(event) => showHomePage(event)}>
           <img src="/hd-estate-logo-white.png" alt="" />
           <span className="brandName"><strong>HD</strong> ESTATE</span>
         </a>
         <nav>
-          <a href="#about" onClick={showHomePage}>About</a>
-          <a href="#listings" onClick={showHomePage}>Listings</a>
-          <a href="#services" onClick={showHomePage}>Services</a>
-          <a href="#contact" onClick={showHomePage}>Contact</a>
-          <a href="#footer-connect" onClick={showHomePage}>Connect</a>
+          <a href="#about" onClick={(event) => showHomePage(event, "#about")}>About</a>
+          <a href="#listings" onClick={(event) => showHomePage(event, "#listings")}>Listings</a>
+          <a href="#services" onClick={(event) => showHomePage(event, "#services")}>Services</a>
+          <a href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Contact</a>
+          <a href="#footer-connect" onClick={(event) => showHomePage(event, "#footer-connect")}>Connect</a>
         </nav>
-        <a className="navButton" href="#contact" onClick={showHomePage}>Book Appraisal</a>
+        <a className="navButton" href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Book Appraisal</a>
       </header>
 
       {currentLegalPage ? (
@@ -362,7 +405,12 @@ export default function App() {
 
       <footer>
         <div className="footerIntro">
-          <a className="brand footerBrand" href="#home" aria-label="HD Estate home" onClick={showHomePage}>
+          <a
+            className="brand footerBrand"
+            href="#home"
+            aria-label="HD Estate home"
+            onClick={(event) => showHomePage(event)}
+          >
             <img src="/hd-estate-logo-white.png" alt="" />
             <span className="brandName"><strong>HD</strong> ESTATE</span>
           </a>
@@ -383,7 +431,7 @@ export default function App() {
                 {link.name}
               </button>
             ) : (
-              <a href={link.href} onClick={showHomePage} key={link.name}>{link.name}</a>
+              <a href={link.href} onClick={(event) => showHomePage(event, link.href)} key={link.name}>{link.name}</a>
             )
           ))}
         </div>
@@ -401,7 +449,7 @@ export default function App() {
                 {link.name}
               </button>
             ) : (
-              <a href={link.href} onClick={showHomePage} key={link.name}>{link.name}</a>
+              <a href={link.href} onClick={(event) => showHomePage(event, link.href)} key={link.name}>{link.name}</a>
             )
           ))}
         </div>
