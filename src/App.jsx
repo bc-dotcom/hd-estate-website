@@ -45,7 +45,7 @@ const properties = [
 
 const socialLinks = [
   { name: "Facebook", href: "https://www.facebook.com/", icon: Users },
-  { name: "Instagram", href: "https://www.instagram.com/", icon: Camera },
+  { name: "Instagram", href: "https://www.instagram.com/hdestategroup?igsh=YTNjM2k4OXppYnRi", icon: Camera },
 ];
 
 const browseLinks = [
@@ -250,12 +250,6 @@ export default function App() {
           <p className="heroSmallText">
             Looking to buy, sell, lease or manage a property? Speak with HD Estate today.
           </p>
-
-          <div className="heroActions">
-            <a href="#contact" className="primaryBtn">Book an Appraisal</a>
-            <a href="#listings" className="secondaryBtn">View Listings</a>
-            <a href="#contact" className="secondaryBtn">Contact Us</a>
-          </div>
         </div>
       </section>
 

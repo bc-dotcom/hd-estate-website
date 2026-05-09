@@ -54,8 +54,8 @@ body {
 
 .brand img {
   display: block;
-  width: 84px;
-  height: 58px;
+  width: 146px;
+  height: 102px;
   object-fit: contain;
 }
 
@@ -79,13 +79,13 @@ body {
 }
 
 .footerBrand img {
-  width: 112px;
-  height: 78px;
+  width: 166px;
+  height: 116px;
 }
 
 .footerIntro .footerBrand img {
-  width: 96px;
-  height: 66px;
+  width: 154px;
+  height: 108px;
   padding: 6px;
   background: #111;
   border-radius: 4px;
@@ -377,8 +377,15 @@ h2 {
 }
 
 .aboutCopy {
+  width: min(760px, 100%);
   display: grid;
   gap: 18px;
+  text-align: justify;
+}
+
+.aboutCopy p {
+  text-align: justify;
+  text-wrap: pretty;
 }
 
 .center {
@@ -710,13 +717,14 @@ footer {
 }
 
 .footerIntro p {
-  max-width: 260px;
+  max-width: none;
   margin: 32px 0 auto;
   color: #d8d8d8;
   font-family: "Brush Script MT", "Segoe Script", cursive;
-  font-size: 26px;
+  font-size: 30px;
   font-style: italic;
-  line-height: 1.25;
+  line-height: 1.18;
+  white-space: nowrap;
 }
 
 .footerIntro small {
@@ -998,8 +1006,8 @@ footer {
   }
 
   .brand img {
-    width: 68px;
-    height: 48px;
+    width: 100px;
+    height: 70px;
   }
 
   .brandName {
@@ -1044,7 +1052,10 @@ footer {
   }
 
   .footerIntro p {
+    max-width: 100%;
     margin: 24px 0 28px;
+    font-size: 26px;
+    white-space: normal;
   }
 
   .legalPage {
