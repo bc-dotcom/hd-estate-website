@@ -110,26 +110,41 @@ const getPropertySearchFromPath = () => {
 
 const propertyActions = [
   {
-    label: "Lease",
-    video: "https://www.pexels.com/download/video/4301616/",
-    fallback: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1100&q=80",
-  },
-  {
     label: "Buy",
+    slug: "buy",
     video: "https://www.pexels.com/download/video/15887298/",
     fallback: "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1100&q=80",
   },
   {
     label: "Sell",
+    slug: "sell",
     video: "https://www.pexels.com/download/video/16641481/",
     fallback: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1100&q=80",
   },
+  {
+    label: "Lease",
+    slug: "lease",
+    video: "https://www.pexels.com/download/video/4301616/",
+    fallback: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1100&q=80",
+  },
+  {
+    label: "Rent",
+    slug: "rent",
+    video: "https://www.pexels.com/download/video/7578546/",
+    fallback: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1100&q=80",
+  },
 ];
+
+const getEnquiryTypeFromPath = () => {
+  const match = window.location.pathname.match(/^\/enquiry\/(buy|sell|lease|rent)$/);
+  return match ? match[1] : null;
+};
 
 export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [legalPage, setLegalPage] = useState(getLegalPageFromPath);
   const [propertySearch, setPropertySearch] = useState(getPropertySearchFromPath);
+  const [enquiryType, setEnquiryType] = useState(getEnquiryTypeFromPath);
   const [searchInput, setSearchInput] = useState(getPropertySearchFromPath() || "");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
@@ -137,6 +152,7 @@ export default function App() {
     event?.preventDefault();
     setLegalPage(null);
     setPropertySearch(null);
+    setEnquiryType(null);
 
     if (window.location.pathname !== "/" || window.location.hash !== hash) {
       window.history.pushState(null, "", `/${hash}`);
@@ -150,6 +166,7 @@ export default function App() {
   const showTermsPage = (page) => {
     setLegalPage(page);
     setPropertySearch(null);
+    setEnquiryType(null);
     window.history.pushState({ legalPage: page }, "", legalPagePaths[page]);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -158,6 +175,7 @@ export default function App() {
     const cleanArea = area.trim();
     setLegalPage(null);
     setPropertySearch(cleanArea);
+    setEnquiryType(null);
     setSearchInput(cleanArea);
     window.history.pushState(
       { propertySearch: cleanArea },
@@ -170,6 +188,15 @@ export default function App() {
   const handlePropertySearch = (event) => {
     event.preventDefault();
     showPropertyResults(searchInput);
+  };
+
+  const showEnquiryPage = (event, type) => {
+    event.preventDefault();
+    setLegalPage(null);
+    setPropertySearch(null);
+    setEnquiryType(type);
+    window.history.pushState({ enquiryType: type }, "", `/enquiry/${type}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const legalPages = {
@@ -212,6 +239,7 @@ export default function App() {
   };
 
   const currentLegalPage = legalPage ? legalPages[legalPage] : null;
+  const currentEnquiryAction = propertyActions.find((action) => action.slug === enquiryType);
   const filteredProperties = propertySearch
     ? properties.filter((property) =>
         `${property.location} ${property.title}`.toLowerCase().includes(propertySearch.toLowerCase())
@@ -222,6 +250,7 @@ export default function App() {
     const handlePopState = () => {
       setLegalPage(getLegalPageFromPath());
       setPropertySearch(getPropertySearchFromPath());
+      setEnquiryType(getEnquiryTypeFromPath());
       setSearchInput(getPropertySearchFromPath() || "");
       window.scrollTo({ top: 0 });
     };
@@ -289,6 +318,44 @@ export default function App() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+          </section>
+        </main>
+      ) : currentEnquiryAction ? (
+        <main className="enquiryPage">
+          <section
+            className="enquiryHero"
+            style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${currentEnquiryAction.fallback})` }}
+          >
+            <p className="eyebrow">Property Enquiry</p>
+            <h1>{currentEnquiryAction.label} enquiry</h1>
+            <p>Tell us a few details and HD Estate will contact you about your property needs.</p>
+          </section>
+
+          <section className="enquiryContent">
+            <div className="enquiryIntro">
+              <p className="eyebrow">{currentEnquiryAction.label}</p>
+              <h2>Send your details</h2>
+              <p>
+                Complete the form and our team will follow up with clear next steps for your
+                {` ${currentEnquiryAction.label.toLowerCase()} `}enquiry.
+              </p>
+            </div>
+
+            <form className="enquiryForm">
+              <input value={currentEnquiryAction.label} readOnly aria-label="Enquiry type" />
+              <input placeholder="Full name" />
+              <input placeholder="Email address" />
+              <input placeholder="Phone number" />
+              <input placeholder="Property address or preferred suburb" />
+              <select defaultValue="">
+                <option value="" disabled>Preferred contact time</option>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Evening</option>
+              </select>
+              <textarea placeholder="Tell us what you need help with"></textarea>
+              <button type="button">Submit Enquiry</button>
+            </form>
           </section>
         </main>
       ) : propertySearch !== null ? (
@@ -412,8 +479,9 @@ export default function App() {
             {propertyActions.map((action) => (
               <a
                 className="listingAction"
-                href="#contact"
+                href={`/enquiry/${action.slug}`}
                 key={action.label}
+                onClick={(event) => showEnquiryPage(event, action.slug)}
                 style={{ backgroundImage: `url(${action.fallback})` }}
               >
                 <video

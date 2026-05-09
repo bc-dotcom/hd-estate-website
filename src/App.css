@@ -401,8 +401,8 @@ h2 {
 
 .listingActions {
   display: grid;
-  grid-template-rows: repeat(3, minmax(150px, 1fr));
-  min-height: 620px;
+  grid-template-rows: repeat(4, minmax(140px, 1fr));
+  min-height: 720px;
   overflow: hidden;
   border-radius: 8px;
   background: #111;
@@ -618,6 +618,7 @@ form {
 }
 
 input,
+select,
 textarea {
   background: #ffffff;
   border: 1px solid rgba(255,255,255,0.15);
@@ -630,6 +631,10 @@ textarea {
 
 textarea {
   min-height: 150px;
+}
+
+select {
+  appearance: none;
 }
 
 button {
@@ -1015,6 +1020,81 @@ footer {
   color: #333;
 }
 
+.enquiryPage {
+  min-height: 100vh;
+  padding-top: 104px;
+  background: #f5f5f2;
+  color: #111;
+}
+
+.enquiryHero {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  padding: 92px 6%;
+  background-position: center;
+  background-size: cover;
+  color: #ffffff;
+  text-align: center;
+}
+
+.enquiryHero h1 {
+  font-size: clamp(42px, 6vw, 86px);
+  line-height: 0.98;
+  text-transform: capitalize;
+}
+
+.enquiryHero p:not(.eyebrow) {
+  max-width: 680px;
+  color: #f2f2f2;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.enquiryContent {
+  padding: 72px 6% 92px;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.78fr) minmax(360px, 1.22fr);
+  gap: 54px;
+  align-items: start;
+}
+
+.enquiryIntro {
+  position: sticky;
+  top: 132px;
+}
+
+.enquiryIntro h2 {
+  margin-bottom: 20px;
+}
+
+.enquiryIntro p {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.enquiryForm {
+  border-radius: 8px;
+  border: 1px solid #deded8;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+.enquiryForm input[readonly] {
+  background: #111;
+  color: #ffffff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.enquiryForm button {
+  background: #111;
+  color: #ffffff;
+}
+
 .feedbackOverlay {
   position: fixed;
   inset: 0;
@@ -1203,6 +1283,7 @@ footer {
   .about,
   .serviceGrid,
   .contact,
+  .enquiryContent,
   footer {
     grid-template-columns: 1fr;
   }
@@ -1284,6 +1365,23 @@ footer {
     height: 240px;
   }
 
+  .enquiryPage {
+    padding-top: 82px;
+  }
+
+  .enquiryHero {
+    min-height: 360px;
+    padding: 78px 24px;
+  }
+
+  .enquiryContent {
+    padding: 64px 24px 78px;
+  }
+
+  .enquiryIntro {
+    position: static;
+  }
+
   .feedbackModal {
     grid-template-columns: 1fr;
     padding: 30px 22px;
@@ -1296,7 +1394,7 @@ footer {
   }
 
   .listingActions {
-    min-height: 420px;
+    min-height: 560px;
   }
 
   .listingDivider {
@@ -1492,3 +1590,4 @@ footer {
   color: white;
   text-shadow: 0 4px 14px rgba(0,0,0,0.6);
 }
+
