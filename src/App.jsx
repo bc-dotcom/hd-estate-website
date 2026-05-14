@@ -146,6 +146,7 @@ const getEnquiryTypeFromPath = () => {
 
 export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [legalPage, setLegalPage] = useState(getLegalPageFromPath);
   const [propertySearch, setPropertySearch] = useState(getPropertySearchFromPath);
   const [enquiryType, setEnquiryType] = useState(getEnquiryTypeFromPath);
@@ -307,7 +308,9 @@ export default function App() {
           <a href="#listings" onClick={(event) => showHomePage(event, "#listings")}>Listings</a>
           <a href="#services" onClick={(event) => showHomePage(event, "#services")}>Services</a>
           <a href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Contact Us</a>
-          <a href={facebookUrl}>Connect</a>
+          <button className="navConnectButton" type="button" onClick={() => setIsConnectOpen(true)}>
+            Connect
+          </button>
         </nav>
       </header>
 
@@ -735,6 +738,37 @@ export default function App() {
               </label>
               <button className="feedbackSubmit" type="button">Submit Feedback</button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {isConnectOpen && (
+        <div
+          className="connectOverlay"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="connect-title"
+          onClick={() => setIsConnectOpen(false)}
+        >
+          <div className="connectModal" onClick={(event) => event.stopPropagation()}>
+            <button
+              className="connectClose"
+              type="button"
+              aria-label="Close connect options"
+              onClick={() => setIsConnectOpen(false)}
+            >
+              x
+            </button>
+            <p className="eyebrow">Connect</p>
+            <h2 id="connect-title">Choose a platform</h2>
+            <div className="connectChoices">
+              {socialLinks.map(({ name, href, icon: Icon }) => (
+                <a href={href} key={name}>
+                  <Icon size={20} strokeWidth={2.1} />
+                  <span>{name}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}

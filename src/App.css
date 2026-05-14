@@ -127,14 +127,24 @@ body {
 
 nav {
   display: flex;
+  align-items: center;
   gap: 34px;
 }
 
-nav a {
+nav a,
+.navConnectButton {
   color: white;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
+}
+
+.navConnectButton {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  line-height: 1;
 }
 
 .hero {
@@ -1129,6 +1139,74 @@ footer {
 .enquiryForm button {
   background: #111;
   color: #ffffff;
+}
+
+.connectOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.connectModal {
+  position: relative;
+  width: min(440px, calc(100vw - 48px));
+  padding: 38px;
+  background: #f5f5f2;
+  color: #111;
+  border-radius: 8px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+}
+
+.connectModal h2 {
+  margin: 8px 0 26px;
+  font-size: 30px;
+}
+
+.connectClose {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: #111;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.connectChoices {
+  display: grid;
+  gap: 12px;
+}
+
+.connectChoices a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  color: #111;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.connectChoices a:hover {
+  border-color: #111;
+  transform: translateY(-2px);
 }
 
 .feedbackOverlay {
