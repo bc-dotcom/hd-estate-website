@@ -306,7 +306,7 @@ export default function App() {
           <a href="#about" onClick={(event) => showHomePage(event, "#about")}>About</a>
           <a href="#listings" onClick={(event) => showHomePage(event, "#listings")}>Listings</a>
           <a href="#services" onClick={(event) => showHomePage(event, "#services")}>Services</a>
-          <a href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Contact</a>
+          <a href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Contact Us</a>
           <a href={facebookUrl}>Connect</a>
         </nav>
       </header>
