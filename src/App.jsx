@@ -72,8 +72,10 @@ const properties = [
   },
 ];
 
+const facebookUrl = "https://www.facebook.com/profile.php?id=61588757889392";
+
 const socialLinks = [
-  { name: "Facebook", href: "https://www.facebook.com/", icon: Users },
+  { name: "Facebook", href: facebookUrl, icon: Users },
   { name: "Instagram", href: "https://www.instagram.com/hdestategroup?igsh=YTNjM2k4OXppYnRi", icon: Camera },
 ];
 
@@ -296,7 +298,7 @@ export default function App() {
           <a href="#listings" onClick={(event) => showHomePage(event, "#listings")}>Listings</a>
           <a href="#services" onClick={(event) => showHomePage(event, "#services")}>Services</a>
           <a href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Contact</a>
-          <a href="#footer-connect" onClick={(event) => showHomePage(event, "#footer-connect")}>Connect</a>
+          <a href={facebookUrl}>Connect</a>
         </nav>
         <a className="navButton" href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Book Appraisal</a>
       </header>
@@ -658,7 +660,7 @@ export default function App() {
         <div id="footer-connect" className="footerColumn footerSocial">
           <h2>Connect</h2>
           {socialLinks.map(({ name, href, icon: Icon }) => (
-            <a href={href} key={name} target="_blank" rel="noreferrer">
+            <a href={href} key={name}>
               <Icon size={18} strokeWidth={2.1} />
               <span>{name}</span>
             </a>
