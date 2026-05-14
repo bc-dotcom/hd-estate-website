@@ -289,10 +289,19 @@ export default function App() {
   return (
     <div className="site">
       <header className="navbar">
-        <a className="brand" href="#home" aria-label="HD Estate home" onClick={(event) => showHomePage(event)}>
-          <img src="/hd-estate-logo-white.png" alt="" />
-          <span className="brandName"><strong>HD</strong> ESTATE</span>
-        </a>
+        <div className="headerBrandGroup">
+          <a className="brand" href="#home" aria-label="HD Estate home" onClick={(event) => showHomePage(event)}>
+            <img src="/hd-estate-logo-white.png" alt="" />
+            <span className="brandName"><strong>HD</strong> ESTATE</span>
+          </a>
+          <div className="headerSocial" aria-label="Social links">
+            {socialLinks.map(({ name, href, icon: Icon }) => (
+              <a href={href} key={name} aria-label={name} title={name}>
+                <Icon size={18} strokeWidth={2.1} />
+              </a>
+            ))}
+          </div>
+        </div>
         <nav>
           <a href="#about" onClick={(event) => showHomePage(event, "#about")}>About</a>
           <a href="#listings" onClick={(event) => showHomePage(event, "#listings")}>Listings</a>
@@ -300,7 +309,6 @@ export default function App() {
           <a href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Contact</a>
           <a href={facebookUrl}>Connect</a>
         </nav>
-        <a className="navButton" href="#contact" onClick={(event) => showHomePage(event, "#contact")}>Book Appraisal</a>
       </header>
 
       {currentLegalPage ? (
@@ -447,6 +455,10 @@ export default function App() {
             <button type="submit">Search</button>
           </form>
 
+          <a href="#contact" className="appraisalLink" onClick={(event) => showHomePage(event, "#contact")}>
+            Book free appraisal <ArrowRight size={18} />
+          </a>
+
           <p className="heroSmallText">
             Looking to buy, sell, lease or manage a property? Speak with HD Estate today.
           </p>
@@ -576,9 +588,6 @@ export default function App() {
         <div className="ctaContent">
           <h2>Ready to understand your property value?</h2>
           <p>Book a free appraisal and speak with HD Estate today.</p>
-          <a href="#contact" className="primaryBtn">
-            Get Free Appraisal <ArrowRight size={18} />
-          </a>
         </div>
       </section>
 
